@@ -1,5 +1,6 @@
 package nyc.c4q.ramonaharrison.accesscats;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -16,7 +17,8 @@ import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 public class AnimalDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "animal.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
+    public final String IMGURL = "https://s-media-cache-ak0.pinimg.com/564x/0f/f4/d7/0ff4d7727a703388392727509cdfaba9.jpg";
 
     // make your database instance a singleton instance across the entire application's lifecycle.
     private static AnimalDatabaseHelper instance;
@@ -51,12 +53,16 @@ public class AnimalDatabaseHelper extends SQLiteOpenHelper {
         // add indexes and other database tweaks in this method if you want
 
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // this will upgrade tables, adding columns and new tables.
         // Note that existing columns will not be converted
         cupboard().withDatabase(db).upgradeTables();
         // do migration work if you have an alteration to make to your schema here
+        if (newVersion == 4) {
+            ContentValues cv = new ContentValues();
+            cv.put("image", IMGURL);
+            cupboard().withDatabase(db).update(Cat.class, cv);
+        }
     }
 }

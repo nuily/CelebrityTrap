@@ -15,8 +15,8 @@ public class Cat {
     // this will serve as the index for the POJO within the SQLite table and will
     // auto-increment.
     private Long _id;
-
     private String name;
+    private String image;
 
     // column name defaults to field name
     // or we can use @Column annotation to specify a custom name
@@ -48,5 +48,13 @@ public class Cat {
 
     public Long getLastFed() {
         return lastFed;
+    }
+
+    public void setLastFed(Long lastFed) {
+        this.lastFed = lastFed;
+    }
+
+    public String getImage() {
+        return image;
     }
 }

@@ -4,8 +4,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -53,20 +56,27 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder> {
 
     public class CatViewHolder extends RecyclerView.ViewHolder {
 
-        LinearLayout layout;
+        RelativeLayout layout;
         TextView catName;
         TextView lastFed;
+        ImageView catimgView;
+        View wtfView;
 
         public CatViewHolder(View itemView) {
             super(itemView);
-            layout = (LinearLayout) itemView.findViewById(R.id.layout);
+            this.wtfView = itemView;
+            layout = (RelativeLayout) itemView.findViewById(R.id.layout);
             catName = (TextView) itemView.findViewById(R.id.tv_cat_name);
             lastFed = (TextView) itemView.findViewById(R.id.tv_last_fed);
+            catimgView = (ImageView) itemView.findViewById(R.id.img_cat);
         }
 
         public void bind(Cat c) {
             final Cat cat = c;
             catName.setText(cat.getName());
+            Picasso.with(itemView.getContext())
+                    .load(cat.getImage())
+                    .into(catimgView);
             lastFed.setText(DateFormat.getDateTimeInstance().format(new Date(cat.getLastFed())));
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
