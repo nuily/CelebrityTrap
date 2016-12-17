@@ -33,6 +33,20 @@ public class MyAlarmReceiver extends BroadcastReceiver {
         context.startService(i);
     }
 
+    // TODO
+   /* Switch (randomNumber) {
+        Case 1: Pineapples
+        Run pineappleCelebs;
+        Case 2: Cherries
+        Run cherriesCelebs;
+        Case 3: Apples
+        Run applesCelebs;
+        Default:
+        Run basicCelebs;
+    }*/
+//Random number is between 0 - 3, I think.
+//It was my initial thought but haven’t got it to function.
+
 
 
     public void addCat(Cat cat) {
